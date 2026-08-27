@@ -16,7 +16,7 @@ Tu vas avoir des erreurs. Pour que le build fonctionne, tu devras mettre en comm
 1. Faire la commande ci-dessous
 
 ```
-dotnet ef database update --startup-project ..\CleanTodo.WebAPI --project ./
+dotnet ef database update --startup-project ..\CleanTodo.WebAPI --project .\
 ```
 
 Ce que ça fait? Ça applique les migrations dans le dossier migrations.
