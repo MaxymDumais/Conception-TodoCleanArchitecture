@@ -6,6 +6,12 @@
 1. Posséder une instance de MariadDB sur ta machine avec l'utilisateur root:root
 1. MariaDB possède une table nommée PWATodos (IA niveau 3)
 1. Faire un build de la solution.
+
+Tu vas avoir des erreurs. Pour que le build fonctionne, tu devras mettre en commentaire les useCases qui n'existent pas encore dans DependencyInjection. Tu devras aussi créer un nouveau DTO qui se nomme `CreateTodoDTO`. Cette classe ne contient que deux propriétés qui sont fournies lors de la création d'un DTO. Peux-tu deviner lesquelles?
+
+
+## Quand le build fonctionne.
+
 1. Ouvrir une fenêtre console dans visual studio en cliquant droit sur le projet CleanTodo.Infrastructure + terminal
 1. Faire la commande ci-dessous
 
