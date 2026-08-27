@@ -9,6 +9,7 @@
 
 Tu vas avoir des erreurs. Pour que le build fonctionne, tu devras mettre en commentaire les useCases qui n'existent pas encore dans DependencyInjection. Tu devras aussi créer un nouveau DTO qui se nomme `CreateTodoDTO`. Cette classe ne contient que deux propriétés qui sont fournies lors de la création d'un DTO. Peux-tu deviner lesquelles?
 
+Tu dois aussi décharger le projet Todo.Tests (clic droit sur le projet, décharger)
 
 ## Quand le build fonctionne.
 
