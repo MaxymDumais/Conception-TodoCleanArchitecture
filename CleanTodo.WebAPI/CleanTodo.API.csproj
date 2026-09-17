@@ -22,4 +22,8 @@
     <ProjectReference Include="..\CleanTodo.Infrastructure\CleanTodo.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="publish\" />
+  </ItemGroup>
+
 </Project>
