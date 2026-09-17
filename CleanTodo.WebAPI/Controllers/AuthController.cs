@@ -10,9 +10,16 @@ namespace CleanTodo.API.Controllers
    [Route("api/[controller]")]
    public class AuthController : ControllerBase
    {
-      [Route("test")]
-      [HttpGet]
-      public async Task<IActionResult> GetAll()
+      [Route("Register")]
+      [HttpPost]
+      public async Task<IActionResult> Register()
+      {
+         return Ok("ok");
+      }
+
+      [Route("Login")]
+      [HttpPost]
+      public async Task<IActionResult> Login()
       {
          return Ok("ok");
       }
