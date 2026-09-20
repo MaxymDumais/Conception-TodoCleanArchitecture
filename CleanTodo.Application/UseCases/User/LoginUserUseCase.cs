@@ -14,12 +14,12 @@ namespace CleanTodo.Application.UseCases.User
          _userRepository = userRepository;
       }
 
-      public async Task<Domain.DTOS.User> Execute(string username, string password)
+      public async Task<UserDto> Execute(string username, string password)
       {
          Domain.Entities.User? user = await _userRepository.FindByInfo(username, password);
          if (user == null)
             throw new NotFoundException(username);
-         return new Domain.DTOS.User(user);
+         return new UserDto(user);
       }
    }
 }

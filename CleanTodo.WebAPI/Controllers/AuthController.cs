@@ -10,13 +10,15 @@ namespace CleanTodo.API.Controllers
    [Route("api/[controller]")]
    public class AuthController(LoginUserUseCase loginUserUseCase, RegisterUserUseCase registerUserUseCase) : ControllerBase
    {
+
       [Route("Register")]
       [HttpPost]
       public async Task<IActionResult> Register(RegisterUserDto registerUser)
       {
          try
          {
-            string confirmation = await registerUserUseCase.Execute(registerUser);
+            RegisterUserDto newUser = new RegisterUserDto(registerUser.Username, registerUser.Password);
+            string confirmation = await registerUserUseCase.Execute(newUser);
             return Ok(confirmation);
          }
          catch (Exception)
@@ -31,7 +33,9 @@ namespace CleanTodo.API.Controllers
       {
          try
          {
-            Domain.DTOS.User user = await loginUserUseCase.Execute(username, password);
+
+            UserDto user = new UserDto();
+            user = await loginUserUseCase.Execute(username, password);
             return Ok("Connexion réussie!! Bienvenue " + username + "!!");
          }
          catch (NotFoundException)

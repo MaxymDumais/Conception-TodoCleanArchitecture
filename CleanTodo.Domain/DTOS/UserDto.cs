@@ -5,14 +5,15 @@ using System.Text;
 
 namespace CleanTodo.Domain.DTOS
 {
-   public class User
+   public class UserDto
    {
       public Guid Id { get; set; }
       public string Username { get; set; }
       public string Password { get; set; }
 
+      public UserDto() { }
 
-      public User(Entities.User user)
+      public UserDto(User user)
       {
          Id = user.Id;
          Username = user.Username;

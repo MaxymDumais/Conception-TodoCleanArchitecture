@@ -11,7 +11,6 @@ public class TodoDto
 
     public TodoDto() { }
 
-
     // Devrait être fait dans Mapping -> automapper.
     public TodoDto(Todo todo)
     {
