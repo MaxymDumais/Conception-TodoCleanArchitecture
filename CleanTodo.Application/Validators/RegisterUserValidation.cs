@@ -7,7 +7,7 @@ using System.Text;
 
 namespace CleanTodo.Application.Validators
 {
-   public class RegisterUserValidation : AbstractValidator<User>
+   public class RegisterUserValidation : AbstractValidator<RegisterUserDto>
    {
       public RegisterUserValidation()
       {

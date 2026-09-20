@@ -8,13 +8,21 @@ namespace CleanTodo.API.Controllers
 {
    [ApiController]
    [Route("api/[controller]")]
-   public class AuthController(LoginUserUseCase loginUserUseCase) : ControllerBase
+   public class AuthController(LoginUserUseCase loginUserUseCase, RegisterUserUseCase registerUserUseCase) : ControllerBase
    {
       [Route("Register")]
       [HttpPost]
-      public async Task<IActionResult> Register()
+      public async Task<IActionResult> Register(RegisterUserDto registerUser)
       {
-         return Ok("ok");
+         try
+         {
+            string confirmation = await registerUserUseCase.Execute(registerUser);
+            return Ok(confirmation);
+         }
+         catch (Exception)
+         {
+            return NotFound("Erreur lors de la création du compte");
+         }
       }
 
       [Route("Login")]
