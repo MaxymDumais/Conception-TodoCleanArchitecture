@@ -1,5 +1,5 @@
 ﻿using CleanTodo.Application.UseCase;
-using CleanTodo.Application.UseCases.Todo;
+using CleanTodo.Application.UseCases.User;
 using CleanTodo.Domain.DTOS;
 using CleanTodo.Domain.Exceptions;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +8,7 @@ namespace CleanTodo.API.Controllers
 {
    [ApiController]
    [Route("api/[controller]")]
-   public class AuthController : ControllerBase
+   public class AuthController(LoginUserUseCase loginUserUseCase) : ControllerBase
    {
       [Route("Register")]
       [HttpPost]
@@ -19,9 +19,17 @@ namespace CleanTodo.API.Controllers
 
       [Route("Login")]
       [HttpPost]
-      public async Task<IActionResult> Login()
+      public async Task<IActionResult> Login(string username, string password)
       {
-         return Ok("ok");
+         try
+         {
+            Domain.DTOS.User user = await loginUserUseCase.Execute(username, password);
+            return Ok("Connexion réussie!! Bienvenue " + username + "!!");
+         }
+         catch (NotFoundException)
+         {
+            return NotFound("Votre username ou votre mot de passe est incorrect...");
+         }
       }
    }
 }
