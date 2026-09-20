@@ -16,6 +16,12 @@ public class TodoController(GetAllTodosUseCase getAllUseCase, GetTodoUseCase get
       return Ok(todos);
    }
 
+   [HttpGet("test")]
+   public IActionResult Test()
+   {
+      return Ok("Version automatique!");
+   }
+
    //Cadeau! pour le create. On utilise un CreatedAtAction qui retourne un code http 201 et un header location avec l'url du nouvel élément créé.
 
    [HttpPost]
