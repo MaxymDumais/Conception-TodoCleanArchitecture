@@ -19,13 +19,15 @@ namespace CleanTodo.Application.UseCases.Todo
          _validator = validator;
       }
 
-      //public async Task<TodoDto> Execute(CreateTodoDto createTodoDto)
-      //{
-      //   ValidationResult validationResult = await _validator.ValidateAsync(createTodoDto);
-      //   if (!validationResult.IsValid)
-      //   {
-      //      throw new ValidationException(validationResult.Errors);
-      //   }
-      //}
+      public async Task<TodoDto> Execute(CreateTodoDto createTodoDto)
+      {
+         //ValidationResult validationResult = await _validator.ValidateAsync(createTodoDto);
+         //if (!validationResult.IsValid)
+         //{
+         //   throw new ValidationException(validationResult.Errors);
+         //}
+
+         return new TodoDto();
+      }
    }
 }
