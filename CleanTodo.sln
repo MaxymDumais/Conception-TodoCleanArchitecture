@@ -16,14 +16,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApplicationTests", "Tod
 		{8055F346-446C-4D9D-944A-5ACB0420A82A} = {8055F346-446C-4D9D-944A-5ACB0420A82A}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{09FEE3E7-564E-4E90-886D-43D5DDE67D61}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{43E1972D-5FA8-46F7-BB62-317C17B39E68}"
-	ProjectSection(SolutionItems) = preProject
-		build.yml = build.yml
-		deploy.yml = deploy.yml
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,9 +45,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{43E1972D-5FA8-46F7-BB62-317C17B39E68} = {09FEE3E7-564E-4E90-886D-43D5DDE67D61}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E5BBFA97-17C1-456F-89A4-52995F5C9AB2}
