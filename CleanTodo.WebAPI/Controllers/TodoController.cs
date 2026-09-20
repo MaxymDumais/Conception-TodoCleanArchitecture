@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 public class TodoController(GetAllTodosUseCase getAllUseCase, GetTodoUseCase getTodoUseCase, CreateTodoUseCase createTodoUseCase) : ControllerBase
 {
    [HttpGet]
+   [Route("getAllTodos")]
    public async Task<ActionResult<IEnumerable<TodoDto>>> GetAll()
    {
       var todos = await getAllUseCase.Execute();
