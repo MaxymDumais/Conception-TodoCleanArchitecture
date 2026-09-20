@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.5.33627.172
+# Visual Studio Version 18
+VisualStudioVersion = 18.10.12210.168 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanTodo.API", "CleanTodo.WebAPI\CleanTodo.API.csproj", "{F2908F1A-4E65-4B74-A78C-70CECC223877}"
 EndProject
@@ -14,6 +14,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApplicationTests", "TodoApplicationTests\TodoApplicationTests.csproj", "{4D3A12F0-A876-4CD7-83FA-00A7B47AE3A8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8055F346-446C-4D9D-944A-5ACB0420A82A} = {8055F346-446C-4D9D-944A-5ACB0420A82A}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{09FEE3E7-564E-4E90-886D-43D5DDE67D61}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{43E1972D-5FA8-46F7-BB62-317C17B39E68}"
+	ProjectSection(SolutionItems) = preProject
+		build.yml = build.yml
+		deploy.yml = deploy.yml
 	EndProjectSection
 EndProject
 Global
@@ -45,6 +53,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{43E1972D-5FA8-46F7-BB62-317C17B39E68} = {09FEE3E7-564E-4E90-886D-43D5DDE67D61}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E5BBFA97-17C1-456F-89A4-52995F5C9AB2}
