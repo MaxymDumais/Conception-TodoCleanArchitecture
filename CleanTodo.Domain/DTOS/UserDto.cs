@@ -11,7 +11,6 @@ namespace CleanTodo.Domain.DTOS
       public string Username { get; set; }
       public string Password { get; set; }
 
-      public UserDto() { }
 
       public UserDto(User user)
       {
