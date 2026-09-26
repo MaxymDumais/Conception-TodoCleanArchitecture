@@ -19,15 +19,16 @@ public class TodoController(GetAllTodosUseCase getAllUseCase, GetTodoUseCase get
    //Cadeau! pour le create. On utilise un CreatedAtAction qui retourne un code http 201 et un header location avec l'url du nouvel élément créé.
 
    [HttpPost]
-   //public async Task<ActionResult<TodoDto>> Create([FromBody] CreateTodoDto createTodoDto)
-   //{
-   //   //TodoDto todo = await createTodoUseCase.Execute(createTodoDto);
+   [Route("AddTodo")]
+   public async Task<ActionResult<TodoDto>> Create([FromBody] CreateTodoDto createTodoDto)
+   {
+      TodoDto todo = await createTodoUseCase.Execute(createTodoDto);
 
-   //   //return CreatedAtAction(
-   //   //    nameof(Get),
-   //   //    new { id = todo.Id },
-   //   //    todo);
-   //}
+      return CreatedAtAction(
+          nameof(Get),
+          new { id = todo.Id },
+          todo);
+   }
 
    [HttpGet("{id}")] // /api/todo/ton_id
    public async Task<IActionResult> Get(Guid id)

@@ -20,7 +20,7 @@ public class TodoRepository : ITodoRepository
     public async Task<Todo> Add(Todo todo)
     {
         EntityEntry<Todo> newTodo = await _context.Todos.AddAsync(todo); // appelle la méthode AddAsync
-        await _context.SaveChangesAsync(); // sauvegarde les changements dans la base de données
+        _context.SaveChanges(); // sauvegarde les changements dans la base de données
         return newTodo.Entity; // retourne l'entité ajoutée.
     }
 

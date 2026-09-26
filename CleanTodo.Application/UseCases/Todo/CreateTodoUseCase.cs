@@ -21,13 +21,15 @@ namespace CleanTodo.Application.UseCases.Todo
 
       public async Task<TodoDto> Execute(CreateTodoDto createTodoDto)
       {
-         //ValidationResult validationResult = await _validator.ValidateAsync(createTodoDto);
-         //if (!validationResult.IsValid)
-         //{
-         //   throw new ValidationException(validationResult.Errors);
-         //}
+         ValidationResult validationResult = await _validator.ValidateAsync(createTodoDto);
+         if (!validationResult.IsValid)
+         {
+            throw new ValidationException(validationResult.Errors);
+         }
 
-         return new TodoDto();
+         Domain.Entities.Todo newTodo = new Domain.Entities.Todo(createTodoDto.Title);
+         _todoRepository.Add(newTodo);
+         return new TodoDto(newTodo);
       }
    }
 }
