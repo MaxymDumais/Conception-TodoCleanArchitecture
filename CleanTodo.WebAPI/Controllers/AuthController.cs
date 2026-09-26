@@ -1,6 +1,7 @@
 ﻿using CleanTodo.Application.UseCase;
 using CleanTodo.Application.UseCases.User;
 using CleanTodo.Domain.DTOS;
+using CleanTodo.Domain.Entities;
 using CleanTodo.Domain.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,9 +18,14 @@ namespace CleanTodo.API.Controllers
       {
          try
          {
-            RegisterUserDto newUser = new RegisterUserDto(registerUser.Username, registerUser.Password);
+            User newUser = new User(registerUser.Username, registerUser.Password);
             string confirmation = await registerUserUseCase.Execute(newUser);
-            return Ok(confirmation);
+            return CreatedAtAction(
+               nameof(newUser.)
+               new { id = newUser.Id},
+               newUser
+               );
+
          }
          catch (Exception)
          {
