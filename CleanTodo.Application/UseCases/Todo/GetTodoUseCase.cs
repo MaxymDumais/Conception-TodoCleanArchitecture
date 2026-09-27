@@ -17,6 +17,7 @@ public class GetTodoUseCase
     public async Task<TodoDto> Execute(Guid id)
     {
         Todo? todo = await _todoRepository.FindById(id);
+         
         if (todo == null)
         {
             throw new NotFoundException(id);

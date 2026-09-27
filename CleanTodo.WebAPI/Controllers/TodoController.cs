@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TodoController(GetAllTodosUseCase getAllUseCase, GetTodoUseCase getTodoUseCase, CreateTodoUseCase createTodoUseCase) : ControllerBase
+public class TodoController(GetAllTodosUseCase getAllUseCase, GetTodoUseCase getTodoUseCase, CreateTodoUseCase createTodoUseCase, DeleteTodoUseCase deleteTodoUseCase) : ControllerBase
 {
    [HttpGet]
    [Route("getTodos")]
@@ -22,15 +22,23 @@ public class TodoController(GetAllTodosUseCase getAllUseCase, GetTodoUseCase get
    [Route("AddTodo")]
    public async Task<ActionResult<TodoDto>> Create([FromBody] CreateTodoDto createTodoDto)
    {
-      TodoDto todo = await createTodoUseCase.Execute(createTodoDto);
+      try
+      {
+         TodoDto todo = await createTodoUseCase.Execute(createTodoDto);
 
-      return CreatedAtAction(
-          nameof(Get),
-          new { id = todo.Id },
-          todo);
+         return CreatedAtAction(
+             nameof(Get),
+             new { id = todo.Id },
+             todo);
+      }
+      catch (Exception)
+      {
+
+         return BadRequest("Veuillez respecter les critères");
+      }
    }
 
-   [HttpGet("{id}")] // /api/todo/ton_id
+   [HttpGet("/getTodo/{id}")] // /api/todo/ton_id
    public async Task<IActionResult> Get(Guid id)
    {
       try
@@ -46,4 +54,18 @@ public class TodoController(GetAllTodosUseCase getAllUseCase, GetTodoUseCase get
 
    // Pour le delete et le update, tu peux retourn un noContent (http 204) qui dit :"Ça fonctionné, je n'ai rien à te retourner"
    //return NoContent();
+
+   [HttpDelete("/deleteTodo/{id}")] // /api/todo/ton_id
+   public async Task<IActionResult> Delete(Guid id)
+   {
+      try
+      {
+         await deleteTodoUseCase.Execute(id);
+         return NoContent();
+      }
+      catch (NotFoundException)
+      {
+         return NotFound("Erreur dans la suppression de ce todo");
+      }
+   }
 }

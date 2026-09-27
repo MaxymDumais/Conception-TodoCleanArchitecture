@@ -5,29 +5,39 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 public class TodoRepository : ITodoRepository
 {
-    private readonly AppDbContext _context;
+   private readonly AppDbContext _context;
 
-    public TodoRepository(AppDbContext context)
-    {
-        _context = context;
-    }
+   public TodoRepository(AppDbContext context)
+   {
+      _context = context;
+   }
 
-    public async Task<List<Todo>> GetAll()
-    {
-        return await _context.Todos.ToListAsync();
-    }
+   public async Task<List<Todo>> GetAll()
+   {
+      return await _context.Todos.ToListAsync();
+   }
 
-    public async Task<Todo> Add(Todo todo)
-    {
-        EntityEntry<Todo> newTodo = await _context.Todos.AddAsync(todo); // appelle la méthode AddAsync
-        _context.SaveChanges(); // sauvegarde les changements dans la base de données
-        return newTodo.Entity; // retourne l'entité ajoutée.
-    }
+   public async Task<Todo> Add(Todo todo)
+   {
+      EntityEntry<Todo> newTodo = await _context.Todos.AddAsync(todo); // appelle la méthode AddAsync
+      await _context.SaveChangesAsync(); // sauvegarde les changements dans la base de données
+      return newTodo.Entity; // retourne l'entité ajoutée.
+   }
 
-    public async Task<Todo?> FindById(Guid id)
-    {
-        return await _context.Todos
-            .Where(x => x.Id == id)
-            .SingleOrDefaultAsync();
-    }
+   public async Task<Todo?> FindById(Guid id)
+   {
+      return await _context.Todos
+          .Where(x => x.Id == id)
+          .SingleOrDefaultAsync();
+   }
+
+   public async Task<bool> Delete(Guid id)
+   {
+      int isTodoDeleted = await _context.Todos
+        .Where(t => t.Id == id)
+        .ExecuteDeleteAsync();
+
+      return isTodoDeleted > 0;
+   }
+
 }
