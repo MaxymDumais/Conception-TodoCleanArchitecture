@@ -38,7 +38,7 @@ public class TodoController(GetAllTodosUseCase getAllUseCase, GetTodoUseCase get
       }
    }
 
-   [HttpGet("/getTodo/{id}")] // /api/todo/ton_id
+   [HttpGet("getTodo/{id}")] // /api/todo/ton_id
    public async Task<IActionResult> Get(Guid id)
    {
       try
@@ -55,7 +55,7 @@ public class TodoController(GetAllTodosUseCase getAllUseCase, GetTodoUseCase get
    // Pour le delete et le update, tu peux retourn un noContent (http 204) qui dit :"Ça fonctionné, je n'ai rien à te retourner"
    //return NoContent();
 
-   [HttpDelete("/deleteTodo/{id}")] // /api/todo/ton_id
+   [HttpDelete("deleteTodo/{id}")] // /api/todo/ton_id
    public async Task<IActionResult> Delete(Guid id)
    {
       try
