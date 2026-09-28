@@ -39,6 +39,15 @@ namespace CleanTodo.API.Controllers
             user = await loginUserUseCase.Execute(username, password);
 
             var token = jwtService.GenerateToken(1, username);
+
+            Response.Cookies.Append("jwt", token, new CookieOptions
+            {
+               HttpOnly = true,                  
+               Secure = false,                    // à placer en https bientôt
+               SameSite = SameSiteMode.Lax,     // à placer en None bientôt
+               Expires = DateTime.UtcNow.AddDays(7)
+            });
+
             return Ok(/*"Connexion réussie!! Bienvenue " + username + "!!",*/ new { Token = token });
          }
          catch (NotFoundException)
@@ -46,5 +55,28 @@ namespace CleanTodo.API.Controllers
             return NotFound("Votre username ou votre mot de passe est incorrect...");
          }
       }
+
+      [Route("Logout")]
+      [HttpPost]
+      public IActionResult Logout()
+      {
+         try
+         {
+            Response.Cookies.Delete("jwt", new CookieOptions
+            {
+               HttpOnly = true,
+               Secure = true,
+               SameSite = SameSiteMode.None
+            });
+
+            return Ok("Déconnexion réussie");
+         }
+         catch (Exception)
+         {
+
+            throw;
+         }
+      }
+
    }
 }
