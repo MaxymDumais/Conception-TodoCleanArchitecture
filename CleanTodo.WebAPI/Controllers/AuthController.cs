@@ -1,4 +1,6 @@
-﻿using CleanTodo.Application.UseCase;
+﻿using Azure.Core;
+using CleanTodo.Application.Services;
+using CleanTodo.Application.UseCase;
 using CleanTodo.Application.UseCases.User;
 using CleanTodo.Domain.DTOS;
 using CleanTodo.Domain.Exceptions;
@@ -8,7 +10,7 @@ namespace CleanTodo.API.Controllers
 {
    [ApiController]
    [Route("api/[controller]")]
-   public class AuthController(LoginUserUseCase loginUserUseCase, RegisterUserUseCase registerUserUseCase) : ControllerBase
+   public class AuthController(JwtService jwtService, LoginUserUseCase loginUserUseCase, RegisterUserUseCase registerUserUseCase) : ControllerBase
    {
 
       [Route("Register")]
@@ -33,10 +35,11 @@ namespace CleanTodo.API.Controllers
       {
          try
          {
-
             UserDto user = new UserDto();
             user = await loginUserUseCase.Execute(username, password);
-            return Ok("Connexion réussie!! Bienvenue " + username + "!!");
+
+            var token = jwtService.GenerateToken(1, username);
+            return Ok(/*"Connexion réussie!! Bienvenue " + username + "!!",*/ new { Token = token });
          }
          catch (NotFoundException)
          {

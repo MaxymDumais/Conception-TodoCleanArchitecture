@@ -7,7 +7,9 @@ namespace CleanTodo.Domain.Interfaces.Repositories
 {
    public interface IUserRepository
    {
-      Task<User?> FindByInfo(string name, string password);
+      Task<User?> FindByInfo(string name);
+
+
 
       Task<User> Add(User user);
    }

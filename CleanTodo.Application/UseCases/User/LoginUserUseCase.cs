@@ -16,8 +16,9 @@ namespace CleanTodo.Application.UseCases.User
 
       public async Task<UserDto> Execute(string username, string password)
       {
-         Domain.Entities.User? user = await _userRepository.FindByInfo(username, password);
-         if (user == null)
+         Domain.Entities.User? user = await _userRepository.FindByInfo(username);
+         bool isPasswordValid = PasswordHasher.VerifyPassword(password, user.Password);
+         if (user == null || !isPasswordValid)
             throw new NotFoundException(username);
          return new UserDto(user);
       }

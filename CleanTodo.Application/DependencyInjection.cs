@@ -1,4 +1,5 @@
-﻿using CleanTodo.Application.UseCase;
+﻿using CleanTodo.Application.Services;
+using CleanTodo.Application.UseCase;
 using CleanTodo.Application.UseCases.Todo;
 using CleanTodo.Application.UseCases.User;
 using CleanTodo.Application.Validators;
@@ -22,6 +23,8 @@ public static class DependencyInjection
       services.AddScoped<LoginUserUseCase>();
       services.AddScoped<RegisterUserUseCase>();
       services.AddScoped<RegisterUserValidation>();
+      services.AddScoped<JwtService>();
+
       //services.AddScoped<ToggleTodoCompleteStatusUseCase>();
 
       return services;

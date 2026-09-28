@@ -2,12 +2,14 @@ using CleanTodo.Application.UseCase;
 using CleanTodo.Application.UseCases.Todo;
 using CleanTodo.Domain.DTOS;
 using CleanTodo.Domain.Exceptions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("api/[controller]")]
 public class TodoController(GetAllTodosUseCase getAllUseCase, GetTodoUseCase getTodoUseCase, CreateTodoUseCase createTodoUseCase, DeleteTodoUseCase deleteTodoUseCase, ToggleTodoUseCase toggleTodoUseCase) : ControllerBase
 {
+   [Authorize]
    [HttpGet]
    [Route("getTodos")]
    public async Task<ActionResult<IEnumerable<TodoDto>>> GetAll()
@@ -17,7 +19,7 @@ public class TodoController(GetAllTodosUseCase getAllUseCase, GetTodoUseCase get
    }
 
    //Cadeau! pour le create. On utilise un CreatedAtAction qui retourne un code http 201 et un header location avec l'url du nouvel élément créé.
-
+   [Authorize]
    [HttpPost]
    [Route("AddTodo")]
    public async Task<ActionResult<TodoDto>> Create([FromBody] CreateTodoDto createTodoDto)
@@ -38,6 +40,7 @@ public class TodoController(GetAllTodosUseCase getAllUseCase, GetTodoUseCase get
       }
    }
 
+   [Authorize]
    [HttpGet("getTodo/{id}")] // /api/todo/ton_id
    public async Task<IActionResult> Get(Guid id)
    {
@@ -52,6 +55,7 @@ public class TodoController(GetAllTodosUseCase getAllUseCase, GetTodoUseCase get
       }
    }
 
+   [Authorize]
    [HttpPatch("toggleTodo/{id}")] // /api/todo/ton_id
    public async Task<IActionResult> Toggle(Guid id)
    {
@@ -68,7 +72,7 @@ public class TodoController(GetAllTodosUseCase getAllUseCase, GetTodoUseCase get
 
    // Pour le delete et le update, tu peux retourn un noContent (http 204) qui dit :"Ça fonctionné, je n'ai rien à te retourner"
    //return NoContent();
-
+   [Authorize]
    [HttpDelete("deleteTodo/{id}")] // /api/todo/ton_id
    public async Task<IActionResult> Delete(Guid id)
    {

@@ -24,10 +24,10 @@ namespace CleanTodo.Infrastructure.Repositories
          return newUser.Entity; // retourne l'entité ajoutée.
       }
 
-      public async Task<User?> FindByInfo(string username, string password)
+      public async Task<User?> FindByInfo(string username)
       {
          return await _context.Users
-             .Where(x => x.Username == username &&  x.Password == password)
+             .Where(x => x.Username == username)
              .SingleOrDefaultAsync();
       }
    }
