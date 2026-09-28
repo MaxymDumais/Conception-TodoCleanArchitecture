@@ -16,6 +16,7 @@ public static class DependencyInjection
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
       services.AddScoped<CreateTodoUseCase>();
       services.AddScoped<GetTodoUseCase>();
+      services.AddScoped<ToggleTodoUseCase>();
       services.AddScoped<DeleteTodoUseCase>();
       services.AddScoped<GetAllTodosUseCase>();
       services.AddScoped<LoginUserUseCase>();

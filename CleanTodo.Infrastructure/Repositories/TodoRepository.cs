@@ -31,6 +31,17 @@ public class TodoRepository : ITodoRepository
           .SingleOrDefaultAsync();
    }
 
+   public async Task<bool> ToggleCheck(Guid id)
+   {
+      int isChecked = await _context.Todos
+        .Where(t => t.Id == id)
+        .ExecuteUpdateAsync(x => x.SetProperty(
+           t => t.IsCompleted,
+           t => !t.IsCompleted));
+
+      return isChecked > 0;
+   }
+
    public async Task<bool> Delete(Guid id)
    {
       int isTodoDeleted = await _context.Todos

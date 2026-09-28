@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TodoController(GetAllTodosUseCase getAllUseCase, GetTodoUseCase getTodoUseCase, CreateTodoUseCase createTodoUseCase, DeleteTodoUseCase deleteTodoUseCase) : ControllerBase
+public class TodoController(GetAllTodosUseCase getAllUseCase, GetTodoUseCase getTodoUseCase, CreateTodoUseCase createTodoUseCase, DeleteTodoUseCase deleteTodoUseCase, ToggleTodoUseCase toggleTodoUseCase) : ControllerBase
 {
    [HttpGet]
    [Route("getTodos")]
@@ -45,6 +45,20 @@ public class TodoController(GetAllTodosUseCase getAllUseCase, GetTodoUseCase get
       {
          TodoDto todo = await getTodoUseCase.Execute(id);
          return Ok(todo);
+      }
+      catch (NotFoundException)
+      {
+         return NotFound();
+      }
+   }
+
+   [HttpPatch("toggleTodo/{id}")] // /api/todo/ton_id
+   public async Task<IActionResult> Toggle(Guid id)
+   {
+      try
+      {
+         await toggleTodoUseCase.Execute(id);
+         return Ok("Modification réussite avec succès");
       }
       catch (NotFoundException)
       {
