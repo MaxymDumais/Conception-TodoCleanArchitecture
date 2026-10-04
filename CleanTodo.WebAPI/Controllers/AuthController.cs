@@ -46,7 +46,7 @@ namespace CleanTodo.API.Controllers
                Secure = true,                    
                SameSite = SameSiteMode.None,     
                Expires = DateTime.UtcNow.AddDays(7),
-               Path = "/jwt"
+               Path = "/"
             });
 
             return Ok("Connexion réussie, bienvenue " + loginUser.Username);
@@ -65,7 +65,7 @@ namespace CleanTodo.API.Controllers
          {
             Response.Cookies.Delete("jwt", new CookieOptions
             {
-               Path = "/jwt"
+               Path = "/"
             });
 
             return Ok("Déconnexion réussie");
