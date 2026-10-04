@@ -64,9 +64,6 @@ namespace CleanTodo.API.Controllers
          {
             Response.Cookies.Delete("jwt", new CookieOptions
             {
-               HttpOnly = true,
-               Secure = true,
-               SameSite = SameSiteMode.None
             });
 
             return Ok("Déconnexion réussie");
