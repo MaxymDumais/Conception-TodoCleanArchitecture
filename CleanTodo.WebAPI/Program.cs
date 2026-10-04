@@ -43,6 +43,15 @@ public class Program
           ValidAudience = jwtSettings["Audience"],
           IssuerSigningKey = new SymmetricSecurityKey(secretKey)
        };
+
+       options.Events = new JwtBearerEvents
+       {
+          OnMessageReceived = context =>
+          {
+             context.Token = context.Request.Cookies["jwt"];
+             return Task.CompletedTask;
+          }
+       };
     });
 
       builder.Services.AddSwaggerGen(options =>
