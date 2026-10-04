@@ -31,24 +31,24 @@ namespace CleanTodo.API.Controllers
 
       [Route("Login")]
       [HttpPost]
-      public async Task<IActionResult> Login(string username, string password)
+      public async Task<IActionResult> Login([FromBody] LoginUserDto loginUser)
       {
          try
          {
             UserDto user = new UserDto();
-            user = await loginUserUseCase.Execute(username, password);
+            user = await loginUserUseCase.Execute(loginUser);
 
-            var token = jwtService.GenerateToken(1, username);
+            var token = jwtService.GenerateToken(1, loginUser.Username);
 
             Response.Cookies.Append("jwt", token, new CookieOptions
             {
                HttpOnly = true,                  
                Secure = true,                    
-               SameSite = SameSiteMode.Strict,     
+               SameSite = SameSiteMode.None,     
                Expires = DateTime.UtcNow.AddDays(7)
             });
 
-            return Ok("Connexion réussie, bienvenue " + username);
+            return Ok("Connexion réussie, bienvenue " + loginUser.Username);
          }
          catch (NotFoundException)
          {

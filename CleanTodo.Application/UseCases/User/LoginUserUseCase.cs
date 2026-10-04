@@ -14,12 +14,12 @@ namespace CleanTodo.Application.UseCases.User
          _userRepository = userRepository;
       }
 
-      public async Task<UserDto> Execute(string username, string password)
+      public async Task<UserDto> Execute(LoginUserDto loginUser)
       {
-         Domain.Entities.User? user = await _userRepository.FindByInfo(username);
-         bool isPasswordValid = PasswordHasher.VerifyPassword(password, user.Password);
+         Domain.Entities.User? user = await _userRepository.FindByInfo(loginUser.Username);
+         bool isPasswordValid = PasswordHasher.VerifyPassword(loginUser.Password, user.Password);
          if (user == null || !isPasswordValid)
-            throw new NotFoundException(username);
+            throw new NotFoundException(loginUser.Username);
          return new UserDto(user);
       }
    }
