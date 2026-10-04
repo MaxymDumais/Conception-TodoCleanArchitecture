@@ -43,12 +43,12 @@ namespace CleanTodo.API.Controllers
             Response.Cookies.Append("jwt", token, new CookieOptions
             {
                HttpOnly = true,                  
-               Secure = false,                    // à placer en https bientôt
-               SameSite = SameSiteMode.Lax,     // à placer en None bientôt
+               Secure = true,                    
+               SameSite = SameSiteMode.Strict,     
                Expires = DateTime.UtcNow.AddDays(7)
             });
 
-            return Ok(/*"Connexion réussie!! Bienvenue " + username + "!!",*/ new { Token = token });
+            return Ok("Connexion réussie, bienvenue " + username);
          }
          catch (NotFoundException)
          {
