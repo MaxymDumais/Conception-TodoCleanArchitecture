@@ -13,7 +13,7 @@ namespace CleanTodo.API.Controllers
    public class PingController() : ControllerBase
    {
 
-      [Route("Ping")]
+      [Route("ping")]
       [HttpGet]
       public async Task<IActionResult> Ping()
       {
