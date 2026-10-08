@@ -21,7 +21,7 @@ namespace CleanTodo.API.Controllers
          {
             RegisterUserDto newUser = new RegisterUserDto(registerUser.Username, registerUser.Password);
             string confirmation = await registerUserUseCase.Execute(newUser);
-            return Ok();
+            return NoContent();
          }
          catch (Exception)
          {
