@@ -19,7 +19,7 @@ namespace CleanTodo.API.Controllers
       {
          try
          {
-            return Ok("Pong!");
+            return Ok("pong");
          }
          catch (Exception)
          {
