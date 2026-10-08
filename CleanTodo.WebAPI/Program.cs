@@ -54,6 +54,18 @@ public class Program
        };
     });
 
+      builder.Services.AddCors(options =>
+      {
+         options.AddPolicy("ReactNative", policy =>
+         {
+            policy
+                .WithOrigins("http://localhost:8081")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+         });
+      });
+
       builder.Services.AddSwaggerGen(options =>
       {
          options.SwaggerDoc("v1", new OpenApiInfo { Title = "CleanTodo API", Version = "v1" });

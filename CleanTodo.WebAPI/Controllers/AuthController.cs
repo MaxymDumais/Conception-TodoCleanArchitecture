@@ -49,7 +49,7 @@ namespace CleanTodo.API.Controllers
                Path = "/"
             });
 
-            return Ok("Connexion réussie, bienvenue " + loginUser.Username);
+            return Ok(user);
          }
          catch (NotFoundException)
          {
