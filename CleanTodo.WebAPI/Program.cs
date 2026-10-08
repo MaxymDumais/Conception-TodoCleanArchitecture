@@ -61,8 +61,7 @@ public class Program
             policy
                 .AllowAnyOrigin()
                 .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials();
+                .AllowAnyMethod();
          });
       });
 
@@ -83,19 +82,19 @@ public class Program
 
          // 2. Appliquer la sécurité globalement à tous les endpoints
          options.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
+         {
             {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            Array.Empty<string>()
-        }
-    });
+               new OpenApiSecurityScheme
+               {
+                  Reference = new OpenApiReference
+                  {
+                     Type = ReferenceType.SecurityScheme,
+                     Id = "Bearer"
+                  }
+               },
+               Array.Empty<string>()
+            }
+         });
       });
 
 
