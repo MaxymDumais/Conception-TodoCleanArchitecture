@@ -100,7 +100,7 @@ public class Program
 
 
       var app = builder.Build();
-
+      app.UseCors("ReactNative");
       app.UseSwagger();
       app.UseSwaggerUI();
 
