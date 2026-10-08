@@ -56,14 +56,16 @@ public class Program
 
       builder.Services.AddCors(options =>
       {
-         options.AddPolicy("ReactNative", policy =>
+         options.AddPolicy("AllowAll", policy =>
          {
-            policy
-                .WithOrigins("http://localhost:8081")
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials();
+            policy.AllowAnyOrigin()
+
+.AllowAnyMethod()
+
+.AllowAnyHeader();
+
          });
+
       });
 
       builder.Services.AddSwaggerGen(options =>
@@ -100,7 +102,7 @@ public class Program
 
 
       var app = builder.Build();
-      app.UseCors("ReactNative");
+      app.UseCors("AllowAll");
       app.UseSwagger();
       app.UseSwaggerUI();
 
