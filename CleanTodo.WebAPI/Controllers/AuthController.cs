@@ -65,10 +65,14 @@ namespace CleanTodo.API.Controllers
          {
             Response.Cookies.Delete("jwt", new CookieOptions
             {
+               HttpOnly = true,
+               Secure = true,
+               SameSite = SameSiteMode.None,
+               Expires = DateTime.UtcNow.AddDays(7),
                Path = "/"
             });
 
-            return Ok("Déconnexion réussie");
+            return NoContent();
          }
          catch (Exception)
          {
