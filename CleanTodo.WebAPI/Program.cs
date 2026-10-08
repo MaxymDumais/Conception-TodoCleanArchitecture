@@ -58,14 +58,12 @@ public class Program
       {
          options.AddPolicy("AllowAll", policy =>
          {
-            policy.AllowAnyOrigin()
-
-.AllowAnyMethod()
-
-.AllowAnyHeader();
-
+            policy
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
          });
-
       });
 
       builder.Services.AddSwaggerGen(options =>
