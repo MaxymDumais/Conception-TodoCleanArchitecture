@@ -62,7 +62,7 @@ public class TodoController(GetAllTodosUseCase getAllUseCase, GetTodoUseCase get
       try
       {
          await toggleTodoUseCase.Execute(id);
-         return Ok("Modification réussite avec succès");
+         return NoContent();
       }
       catch (NotFoundException)
       {
