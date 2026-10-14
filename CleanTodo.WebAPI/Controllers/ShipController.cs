@@ -1,7 +1,11 @@
-﻿using CleanTodo.Application.UseCases.Ship;
+﻿using CleanTodo.Application.UseCase;
+using CleanTodo.Application.UseCases;
+using CleanTodo.Application.UseCases.Ship;
 using CleanTodo.Application.UseCases.Todo;
 using CleanTodo.Domain.DTOS;
 using CleanTodo.Domain.DTOS.Ships;
+using CleanTodo.Domain.Entities;
+using CleanTodo.Domain.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,15 +13,38 @@ namespace CleanTodo.API.Controllers
 {
    [ApiController]
    [Route("api/[controller]")]
-   public class ShipController(GetAllShipsUseCase getAllShipsUseCase, CreateShipUseCase createShipUseCase) : ControllerBase
+   public class ShipController(GetAllShipsUseCase getAllShipsUseCase, GetShipUseCase getShipUseCase, CreateShipUseCase createShipUseCase) : ControllerBase
    {
       [Authorize]
       [HttpGet]
       [Route("getShips")]
       public async Task<ActionResult<IEnumerable<ShipDto>>> GetAll()
       {
+         try
+         {
             var ships = await getAllShipsUseCase.Execute();
             return Ok(ships);
+         }
+         catch (Exception)
+         {
+
+            return BadRequest("Erreur lors de l'obtention de la liste des navires du port");
+         }
+      }
+
+      [Authorize]
+      [HttpGet("getShip/{id}")] 
+      public async Task<IActionResult> Get(Guid id)
+      {
+         try
+         {
+            ShipDto ship = await getShipUseCase.Execute(id);
+            return Ok(ship);
+         }
+         catch (NotFoundException)
+         {
+            return NotFound();
+         }
       }
 
       [Authorize]
@@ -32,7 +59,10 @@ namespace CleanTodo.API.Controllers
                return BadRequest("Le port est plein!! (8 navires maximum). Impossible d'ammarer le navire");
 
             ShipDto ship = await createShipUseCase.Execute(createShipDto);
-            return Ok();
+            return CreatedAtAction(
+             nameof(Get),
+             new { id = ship.Id },
+             ship);
          }
          catch (Exception)
          {

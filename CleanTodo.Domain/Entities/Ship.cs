@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CleanTodo.Domain.Enums;
+﻿using CleanTodo.Domain.Enums;
 
 namespace CleanTodo.Domain.Entities
 {

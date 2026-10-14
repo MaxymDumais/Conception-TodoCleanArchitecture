@@ -1,5 +1,6 @@
 ﻿using CleanTodo.Application.Services;
 using CleanTodo.Application.UseCase;
+using CleanTodo.Application.UseCases;
 using CleanTodo.Application.UseCases.Ship;
 using CleanTodo.Application.UseCases.Todo;
 using CleanTodo.Application.UseCases.User;
@@ -27,7 +28,9 @@ public static class DependencyInjection
       services.AddScoped<GetAllTodosUseCase>();
       // Dépendances pour les useCases de Ship
       services.AddScoped<GetAllShipsUseCase>();
+      services.AddScoped<GetShipUseCase>();
       services.AddScoped<CreateShipUseCase>();
+
 
       services.AddScoped<CreateTodoValidation>();
       //services.AddScoped<ToggleTodoCompleteStatusUseCase>();
