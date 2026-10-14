@@ -17,7 +17,7 @@ namespace CleanTodo.Domain.Entities
 
       public int CrewSize { get; set; }
 
-      public ShipStatusEnum Status { get; set; }
+      public string Status { get; set; }
 
       public string CreatedBy { get; set; }
 
@@ -32,7 +32,7 @@ namespace CleanTodo.Domain.Entities
          GoldCargo = goldCargo;
          Captain = captain;
          CrewSize = crewSize;
-         Status = status;
+         Status = status.ToString();
          CreatedBy = "Maxym d";
          CreatedAt = DateTime.Now; 
          LastModified = DateTime.Now;

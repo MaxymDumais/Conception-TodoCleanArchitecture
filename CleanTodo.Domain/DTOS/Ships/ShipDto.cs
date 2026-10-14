@@ -18,7 +18,7 @@ namespace CleanTodo.Domain.DTOS.Ships
 
       public int CrewSize { get; set; }
 
-      public ShipStatusEnum Status { get; set; }
+      public string Status { get; set; }
 
       public string CreatedBy { get; set; }
 

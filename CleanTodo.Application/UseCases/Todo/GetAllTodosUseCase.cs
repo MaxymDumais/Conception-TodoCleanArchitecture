@@ -3,7 +3,7 @@ using CleanTodo.Domain.Interfaces.Repositories;
 
 namespace CleanTodo.Application.UseCase;
 
-public class GetAllTodosUseCase
+public class GetAllTodosUseCase  
 {
     private readonly ITodoRepository _todoRepository;
 
