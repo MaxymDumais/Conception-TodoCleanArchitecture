@@ -27,7 +27,9 @@ public static class DependencyInjection
       services.AddScoped<GetAllTodosUseCase>();
       // Dépendances pour les useCases de Ship
       services.AddScoped<GetAllShipsUseCase>();
+      services.AddScoped<CreateShipUseCase>();
 
+      services.AddScoped<CreateTodoValidation>();
       //services.AddScoped<ToggleTodoCompleteStatusUseCase>();
 
       return services;

@@ -1,4 +1,6 @@
 ﻿using CleanTodo.Application.UseCases.Ship;
+using CleanTodo.Application.UseCases.Todo;
+using CleanTodo.Domain.DTOS;
 using CleanTodo.Domain.DTOS.Ships;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +9,7 @@ namespace CleanTodo.API.Controllers
 {
    [ApiController]
    [Route("api/[controller]")]
-   public class ShipController(GetAllShipsUseCase getAllShipsUseCase) : ControllerBase
+   public class ShipController(GetAllShipsUseCase getAllShipsUseCase, CreateShipUseCase createShipUseCase) : ControllerBase
    {
       [Authorize]
       [HttpGet]
@@ -16,6 +18,24 @@ namespace CleanTodo.API.Controllers
       {
             var ships = await getAllShipsUseCase.Execute();
             return Ok(ships);
+      }
+
+      [Authorize]
+      [HttpPost]
+      [Route("addShip")]
+      public async Task<ActionResult<TodoDto>> Create([FromBody] CreateShipDto createShipDto)
+      {
+         try
+         {
+            ShipDto ship = await createShipUseCase.Execute(createShipDto);
+
+            return Ok();
+         }
+         catch (Exception)
+         {
+
+            return BadRequest("Veuillez respecter les critères");
+         }
       }
    }
 }
