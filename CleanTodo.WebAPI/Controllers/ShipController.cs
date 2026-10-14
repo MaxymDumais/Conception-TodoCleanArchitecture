@@ -27,8 +27,11 @@ namespace CleanTodo.API.Controllers
       {
          try
          {
-            ShipDto ship = await createShipUseCase.Execute(createShipDto);
+            IList<ShipDto> ships = await getAllShipsUseCase.Execute();
+            if (ships.Count >= 8)
+               return BadRequest("Le port est plein!! (8 navires maximum). Impossible d'ammarer le navire");
 
+            ShipDto ship = await createShipUseCase.Execute(createShipDto);
             return Ok();
          }
          catch (Exception)
