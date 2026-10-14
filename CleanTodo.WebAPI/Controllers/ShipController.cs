@@ -13,7 +13,7 @@ namespace CleanTodo.API.Controllers
 {
    [ApiController]
    [Route("api/[controller]")]
-   public class ShipController(GetAllShipsUseCase getAllShipsUseCase, GetShipUseCase getShipUseCase, CreateShipUseCase createShipUseCase) : ControllerBase
+   public class ShipController(GetAllShipsUseCase getAllShipsUseCase, GetShipUseCase getShipUseCase, CreateShipUseCase createShipUseCase, DeleteShipUseCase deleteShipUseCase) : ControllerBase
    {
       [Authorize]
       [HttpGet]
@@ -68,6 +68,21 @@ namespace CleanTodo.API.Controllers
          {
 
             return BadRequest("Veuillez respecter les critères");
+         }
+      }
+
+      [Authorize]
+      [HttpDelete("deleteShip/{id}")]
+      public async Task<IActionResult> Delete(Guid id)
+      {
+         try
+         {
+            await deleteShipUseCase.Execute(id);
+            return NoContent();
+         }
+         catch (NotFoundException)
+         {
+            return NotFound("Erreur dans la suppression de ce todo");
          }
       }
    }

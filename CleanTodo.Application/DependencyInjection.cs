@@ -30,6 +30,7 @@ public static class DependencyInjection
       services.AddScoped<GetAllShipsUseCase>();
       services.AddScoped<GetShipUseCase>();
       services.AddScoped<CreateShipUseCase>();
+      services.AddScoped<DeleteShipUseCase>();
 
 
       services.AddScoped<CreateTodoValidation>();
