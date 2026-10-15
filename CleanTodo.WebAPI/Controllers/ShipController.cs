@@ -13,7 +13,7 @@ namespace CleanTodo.API.Controllers
 {
    [ApiController]
    [Route("api/[controller]")]
-   public class ShipController(GetAllShipsUseCase getAllShipsUseCase, GetShipUseCase getShipUseCase, CreateShipUseCase createShipUseCase, DeleteShipUseCase deleteShipUseCase) : ControllerBase
+   public class ShipController(GetAllShipsUseCase getAllShipsUseCase, GetShipUseCase getShipUseCase, CreateShipUseCase createShipUseCase, UpdateShipUseCase updateShipUseCase, DeleteShipUseCase deleteShipUseCase) : ControllerBase
    {
       [Authorize]
       [HttpGet]
@@ -63,6 +63,23 @@ namespace CleanTodo.API.Controllers
              nameof(Get),
              new { id = ship.Id },
              ship);
+         }
+         catch (Exception)
+         {
+
+            return BadRequest("Veuillez respecter les critères");
+         }
+      }
+
+      [Authorize]
+      [HttpPatch]
+      [Route("updateShip")]
+      public async Task<ActionResult<ShipDto>> Update([FromBody] UpdateShipDto updateShipDto)
+      {
+         try
+         {
+            ShipDto ship = await updateShipUseCase.Execute(updateShipDto);
+            return Ok();
          }
          catch (Exception)
          {

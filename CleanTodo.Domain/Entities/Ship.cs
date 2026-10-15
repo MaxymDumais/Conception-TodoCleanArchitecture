@@ -35,6 +35,19 @@ namespace CleanTodo.Domain.Entities
          LastModified = DateTime.Now;
       }
 
+      public Ship(Guid id, string name, int goldCargo, string captain, int crewSize, ShipStatusEnum status)
+      {
+         Id = id;
+         Name = name;
+         GoldCargo = goldCargo;
+         Captain = captain;
+         CrewSize = crewSize;
+         Status = status.ToString();
+         CreatedBy = "Maxym d";
+         CreatedAt = DateTime.Now;
+         LastModified = DateTime.Now;
+      }
+
       public Ship() { }
    }
 }

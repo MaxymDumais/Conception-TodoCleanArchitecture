@@ -17,7 +17,7 @@ namespace CleanTodo.Application.Validators.Ships
             .WithMessage("Le nom de votre navire doit contenir entre 2 et 100 caractères...");
 
          RuleFor(x => x.GoldCargo)
-            .NotEmpty()
+            .NotNull()
             .InclusiveBetween(0, 1000000)
             .WithMessage("Le nombre d'or stocké sur le navire doit être entre 0 et 1 000 000...");
 

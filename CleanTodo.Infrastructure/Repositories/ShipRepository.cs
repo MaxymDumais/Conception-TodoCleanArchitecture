@@ -41,10 +41,10 @@ namespace CleanTodo.Infrastructure.Repositories
          int update = await _context.Ships
         .Where(s => s.Id == ship.Id)
         .ExecuteUpdateAsync(x => x
+            .SetProperty(s => s.Name, s => ship.Name)
             .SetProperty(s => s.GoldCargo, s => ship.GoldCargo)
             .SetProperty(s => s.Captain, s => ship.Captain)
             .SetProperty(s => s.CrewSize, s => ship.CrewSize)
-            .SetProperty(s => s.Status, s => ship.Status)
             .SetProperty(s => s.LastModified, s => DateTime.Now));
 
          if (update > 0)
