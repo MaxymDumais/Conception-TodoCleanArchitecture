@@ -78,6 +78,19 @@ namespace CleanTodo.API.Controllers
       {
          try
          {
+
+            IList<ShipDto> ships = await getAllShipsUseCase.Execute();
+            bool isShipExist = false;
+
+            foreach (ShipDto s in ships)
+            {
+               if (s.Id == updateShipDto.Id)
+                  isShipExist = true;
+            }
+
+            if (!isShipExist)
+               return BadRequest("Veuillez modifier un navire existant");
+
             ShipDto ship = await updateShipUseCase.Execute(updateShipDto);
             return Ok();
          }

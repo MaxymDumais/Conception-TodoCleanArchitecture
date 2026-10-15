@@ -31,7 +31,7 @@ namespace CleanTodo.Application.UseCases.Ship
          }
 
          Domain.Entities.Ship newShip = new Domain.Entities.Ship(createShipDto.Name, createShipDto.GoldCargo, createShipDto.Captain, createShipDto.CrewSize, ShipStatusEnum.docked);
-         _shipRepository.Add(newShip);
+         await _shipRepository.Add(newShip);
          return new ShipDto(newShip);
       }
    }
