@@ -92,7 +92,7 @@ namespace CleanTodo.API.Controllers
                return BadRequest("Veuillez modifier un navire existant");
 
             ShipDto ship = await updateShipUseCase.Execute(updateShipDto);
-            return Ok();
+            return NoContent();
          }
          catch (Exception)
          {
