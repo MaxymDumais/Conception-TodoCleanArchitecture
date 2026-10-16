@@ -45,7 +45,7 @@ namespace CleanTodo.API.Controllers
                HttpOnly = true,                  
                Secure = true,                    
                SameSite = SameSiteMode.None,     
-               Expires = DateTime.UtcNow.AddDays(7),
+               Expires = DateTime.UtcNow.AddHours(1),
                Path = "/"
             });
 
