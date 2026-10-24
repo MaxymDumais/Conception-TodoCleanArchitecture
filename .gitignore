@@ -68,3 +68,4 @@ node_modules/
 
 # TypeScript
 *.tsbuildinfo
+/CleanTodo.WebAPI/appsettings.Development.json
