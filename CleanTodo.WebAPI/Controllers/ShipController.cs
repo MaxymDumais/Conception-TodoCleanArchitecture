@@ -15,7 +15,7 @@ namespace CleanTodo.API.Controllers
 {
    [ApiController]
    [Route("api/[controller]")]
-   public class ShipController(GetAllShipsUseCase getAllShipsUseCase, GetShipUseCase getShipUseCase, CreateShipUseCase createShipUseCase, UpdateShipUseCase updateShipUseCase, DeleteShipUseCase deleteShipUseCase, PirateBrokerGateway pirateBrokerGateway) : ControllerBase
+   public class ShipController(GetAllShipsUseCase getAllShipsUseCase, GetShipUseCase getShipUseCase, CreateShipUseCase createShipUseCase, UpdateShipUseCase updateShipUseCase, DeleteShipUseCase deleteShipUseCase, GetPortsUseCase getPortsUseCase) : ControllerBase
    {
 
       [Authorize]
@@ -126,7 +126,7 @@ namespace CleanTodo.API.Controllers
       {
          try
          {
-            bool x = await pirateBrokerGateway.GetAllPorts();
+            bool x = await getPortsUseCase.Execute();
             return Ok(x);
          }
          catch (Exception e)
