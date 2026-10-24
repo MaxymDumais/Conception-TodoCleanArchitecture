@@ -124,12 +124,16 @@ namespace CleanTodo.API.Controllers
       public async Task<IActionResult> GetPorts()
       {
          bool x = await getPortsUseCase.Execute();
-         if (x)
+         try
+         {
+            bool x = await getPortsUseCase.Execute();
             return Ok(x);
-         else if (!x)
-            return BadRequest();
-
-         return Unauthorized();
+         }
+         catch (Exception e)
+         {
+            return BadRequest(e);
+            throw;
+         }
       }
    }
 }
