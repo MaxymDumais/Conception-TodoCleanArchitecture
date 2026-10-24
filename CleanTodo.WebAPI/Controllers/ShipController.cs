@@ -7,6 +7,7 @@ using CleanTodo.Domain.DTOS.Ships;
 using CleanTodo.Domain.Entities;
 using CleanTodo.Domain.Exceptions;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanTodo.API.Controllers
@@ -125,7 +126,10 @@ namespace CleanTodo.API.Controllers
          bool x = await getPortsUseCase.Execute();
          if (x)
             return Ok(x);
-         return BadRequest();
+         else if (!x)
+            return BadRequest();
+
+         return Unauthorized();
       }
    }
 }
