@@ -19,11 +19,9 @@ namespace CleanTodo.Infrastructure.Gateways
       {
          var response = await _httpClient.GetAsync(_httpClient.BaseAddress + "/api/users");
 
-         string portList = await response.Content.ReadAsStringAsync();
+         var portList = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
 
-         List<string> ports = JsonSerializer.Deserialize<List<string>>(portList);
-
-         return ports;
+         return portList.RootElement.GetProperty("users").EnumerateArray().Select(u => u.GetString()).ToList();
       }
 
       public async Task<bool> SendShip()
