@@ -13,7 +13,7 @@ namespace CleanTodo.API.Controllers
 {
    [ApiController]
    [Route("api/[controller]")]
-   public class ShipController(GetAllShipsUseCase getAllShipsUseCase, GetShipUseCase getShipUseCase, CreateShipUseCase createShipUseCase, UpdateShipUseCase updateShipUseCase, DeleteShipUseCase deleteShipUseCase, GetPortsUseCase getPortsUseCase) : ControllerBase
+   public class ShipController(GetAllShipsUseCase getAllShipsUseCase, GetShipUseCase getShipUseCase, CreateShipUseCase createShipUseCase, UpdateShipUseCase updateShipUseCase, DeleteShipUseCase deleteShipUseCase) : ControllerBase
    {
       [Authorize]
       [HttpGet]
@@ -117,13 +117,13 @@ namespace CleanTodo.API.Controllers
       }
 
       
-      [Authorize]
-      [HttpGet]
-      [Route("getPorts")]
-      public async Task<IActionResult> GetPorts()
-      {
-            var portList = await getPortsUseCase.Execute();
-            return Ok(portList);
-      }
+      //[Authorize]
+      //[HttpGet]
+      //[Route("getPorts")]
+      //public async Task<IActionResult> GetPorts()
+      //{
+      //      var portList = await getPortsUseCase.Execute();
+      //      return Ok(portList);
+      //}
    }
 }
