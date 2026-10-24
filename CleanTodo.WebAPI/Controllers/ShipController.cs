@@ -13,7 +13,7 @@ namespace CleanTodo.API.Controllers
 {
    [ApiController]
    [Route("api/[controller]")]
-   public class ShipController(GetAllShipsUseCase getAllShipsUseCase, GetShipUseCase getShipUseCase, CreateShipUseCase createShipUseCase, UpdateShipUseCase updateShipUseCase, DeleteShipUseCase deleteShipUseCase) : ControllerBase
+   public class ShipController(GetAllShipsUseCase getAllShipsUseCase, GetShipUseCase getShipUseCase, CreateShipUseCase createShipUseCase, UpdateShipUseCase updateShipUseCase, DeleteShipUseCase deleteShipUseCase, GetPortsUseCase getPortsUseCase) : ControllerBase
    {
       [Authorize]
       [HttpGet]
@@ -124,7 +124,8 @@ namespace CleanTodo.API.Controllers
       {
          try
          {
-            return Ok();
+            var portList = await getPortsUseCase.Execute();
+            return Ok(portList);
          }
          catch (Exception)
          {
