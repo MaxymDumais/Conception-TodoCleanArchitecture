@@ -17,10 +17,15 @@ namespace CleanTodo.Infrastructure.Gateways
 
       public async Task<bool> GetAllPorts()
       {
-         await _httpClient.GetAsync("/ping");
-
-
-         return true;
+         try
+         {
+            await _httpClient.GetAsync("/ping");
+            return true;
+         }
+         catch (Exception)
+         {
+            return false;
+         }
       }
 
       public async Task<bool> SendShip()
