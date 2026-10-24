@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 
 namespace CleanTodo.Infrastructure.Gateways
 {
@@ -16,7 +17,13 @@ namespace CleanTodo.Infrastructure.Gateways
 
       public async Task<List<string>> GetAllPorts()
       {
-         return new List<string>();
+         var response = await _httpClient.GetAsync(_httpClient.BaseAddress + "/api/users");
+
+         string portList = await response.Content.ReadAsStringAsync();
+
+         List<string> ports = JsonSerializer.Deserialize<List<string>>(portList);
+
+         return ports;
       }
 
       public async Task<bool> SendShip()
