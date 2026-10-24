@@ -19,6 +19,7 @@ namespace CleanTodo.Infrastructure.Gateways
       {
          await _httpClient.GetAsync("/ping");
 
+
          return true;
       }
 
