@@ -1,8 +1,4 @@
 ﻿using CleanTodo.Domain.Interfaces.Gateways;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json;
 
 namespace CleanTodo.Infrastructure.Gateways
 {
@@ -14,6 +10,7 @@ namespace CleanTodo.Infrastructure.Gateways
       {
          _httpClient = httpClient;
       }
+
 
       public async Task<bool> GetAllPorts()
       {

@@ -15,20 +15,15 @@ public class Program
    {
       var builder = WebApplication.CreateBuilder(args);
 
-      // Add services to the container.
       builder.Services.AddControllers();
 
-      // Add Application Layer
       builder.Services.AddApplication();
 
-      // Add Infrastructure Layer
       builder.Services.AddInfrastructure(builder.Configuration);
 
-      // Add Swagger/OpenAPI
       builder.Services.AddEndpointsApiExplorer();
       builder.Services.AddSwaggerGen();
 
-      //Variables liées à l'authentification jwt
       var jwtSettings = builder.Configuration.GetSection("JwtSettings");
       var secretKey = Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JwtSettings")["Key"]);
 
@@ -69,18 +64,17 @@ public class Program
 
       builder.Services.AddHttpClient<PirateBrokerGateway>(client =>
       {
-      client.BaseAddress = new Uri(builder.Configuration.GetSection("PirateBrokerParameters")["BrokerURL"]);
+      client.BaseAddress = new Uri(builder.Configuration["PirateBrokerParameters:BrokerURL"]);
       client.Timeout = TimeSpan.FromSeconds(30);
       client.DefaultRequestHeaders.Add("Accept", "application/json");
-      client.DefaultRequestHeaders.Add("x-client-id", builder.Configuration.GetSection("PirateBrokerParameters")["ClientId"]);
-      client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", builder.Configuration.GetSection("PirateBrokerParameters")["AppToken"]);
+      client.DefaultRequestHeaders.Add("x-client-id", builder.Configuration["PirateBrokerParameters:ClientId"]);
+      client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", builder.Configuration["PirateBrokerParameters:AppToken"]);
       });
 
       builder.Services.AddSwaggerGen(options =>
       {
          options.SwaggerDoc("v1", new OpenApiInfo { Title = "CleanTodo API", Version = "v1" });
 
-         // 1. Définir le schéma de sécurité JWT pour Swagger
          options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
          {
             Name = "Authorization",
@@ -91,7 +85,6 @@ public class Program
             Description = "Entrez directement votre token JWT ci-dessous."
          });
 
-         // 2. Appliquer la sécurité globalement à tous les endpoints
          options.AddSecurityRequirement(new OpenApiSecurityRequirement
          {
             {
@@ -107,7 +100,6 @@ public class Program
             }
          });
       });
-
 
       var app = builder.Build();
       app.UseCors("AllowAll");

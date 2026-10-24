@@ -117,7 +117,6 @@ namespace CleanTodo.API.Controllers
          }
       }
 
-
       [Authorize]
       [HttpGet]
       [Route("getPorts")]
