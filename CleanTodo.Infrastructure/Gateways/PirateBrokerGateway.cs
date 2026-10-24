@@ -15,11 +15,11 @@ namespace CleanTodo.Infrastructure.Gateways
          _httpClient = httpClient;
       }
 
-      public async Task<string> GetAllPorts()
+      public async Task<bool> GetAllPorts()
       {
          var response = await _httpClient.GetAsync(_httpClient.BaseAddress + "/api/ping");
 
-         return response.ToString();
+         return true;
       }
 
       public async Task<bool> SendShip()

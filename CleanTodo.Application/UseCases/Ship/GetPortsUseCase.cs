@@ -18,10 +18,10 @@ namespace CleanTodo.Application.UseCases.Ship
          _pirateBrokerGateway = pirateBrokerGateway;
       }
 
-      public async Task<string> Execute()
+      public async Task<bool> Execute()
       {
-         var ports = await _pirateBrokerGateway.GetAllPorts();
-         return ports;
+         bool x = await _pirateBrokerGateway.GetAllPorts();
+         return x;
       }
    }
 }
