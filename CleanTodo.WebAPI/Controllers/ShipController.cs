@@ -19,7 +19,7 @@ namespace CleanTodo.API.Controllers
       [HttpGet]
       [Route("getShips")]
       public async Task<ActionResult<IEnumerable<ShipDto>>> GetAll()
-      {
+      { 
          try
          {
             var ships = await getAllShipsUseCase.Execute();
@@ -115,5 +115,23 @@ namespace CleanTodo.API.Controllers
             return NotFound("Erreur dans la suppression de ce todo");
          }
       }
+
+
+      //Routes liées au broker
+      //[Authorize]
+      //[HttpGet]
+      //[Route("getPorts")]
+      //public async Task<IActionResult> GetPorts()
+      //{
+      //   try
+      //   {
+
+      //   }
+      //   catch (Exception)
+      //   {
+
+      //      throw;
+      //   }
+      //}
    }
 }
