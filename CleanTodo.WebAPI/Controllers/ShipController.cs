@@ -6,6 +6,7 @@ using CleanTodo.Domain.DTOS;
 using CleanTodo.Domain.DTOS.Ships;
 using CleanTodo.Domain.Entities;
 using CleanTodo.Domain.Exceptions;
+using CleanTodo.Infrastructure.Gateways;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -14,8 +15,9 @@ namespace CleanTodo.API.Controllers
 {
    [ApiController]
    [Route("api/[controller]")]
-   public class ShipController(GetAllShipsUseCase getAllShipsUseCase, GetShipUseCase getShipUseCase, CreateShipUseCase createShipUseCase, UpdateShipUseCase updateShipUseCase, DeleteShipUseCase deleteShipUseCase, GetPortsUseCase getPortsUseCase) : ControllerBase
+   public class ShipController(GetAllShipsUseCase getAllShipsUseCase, GetShipUseCase getShipUseCase, CreateShipUseCase createShipUseCase, UpdateShipUseCase updateShipUseCase, DeleteShipUseCase deleteShipUseCase, PirateBrokerGateway pirateBrokerGateway) : ControllerBase
    {
+
       [Authorize]
       [HttpGet]
       [Route("getShips")]
@@ -124,7 +126,7 @@ namespace CleanTodo.API.Controllers
       {
          try
          {
-            bool x = await getPortsUseCase.Execute();
+            bool x = await pirateBrokerGateway.GetAllPorts();
             return Ok(x);
          }
          catch (Exception e)
