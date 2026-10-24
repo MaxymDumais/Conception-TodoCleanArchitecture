@@ -7,6 +7,13 @@ namespace CleanTodo.Infrastructure.Gateways
 {
    public class PirateBrokerGateway : IPirateBrokerGateway
    {
+      private readonly HttpClient _httpClient;
+
+      public PirateBrokerGateway(HttpClient httpClient)
+      {
+         _httpClient = httpClient;
+      }
+
       public async Task<List<string>> GetAllPorts()
       {
          return new List<string>();

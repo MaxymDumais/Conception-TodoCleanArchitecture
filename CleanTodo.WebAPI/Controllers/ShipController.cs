@@ -116,22 +116,21 @@ namespace CleanTodo.API.Controllers
          }
       }
 
+      
+      [Authorize]
+      [HttpGet]
+      [Route("getPorts")]
+      public async Task<IActionResult> GetPorts()
+      {
+         try
+         {
+            return Ok();
+         }
+         catch (Exception)
+         {
 
-      //Routes liées au broker
-      //[Authorize]
-      //[HttpGet]
-      //[Route("getPorts")]
-      //public async Task<IActionResult> GetPorts()
-      //{
-      //   try
-      //   {
-
-      //   }
-      //   catch (Exception)
-      //   {
-
-      //      throw;
-      //   }
-      //}
+            throw;
+         }
+      }
    }
 }

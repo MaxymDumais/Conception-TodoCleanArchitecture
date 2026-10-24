@@ -1,10 +1,12 @@
-
 // Program.cs
 using CleanTodo.Application;
 using CleanTodo.Infrastructure;
+using CleanTodo.Infrastructure.Data;
+using CleanTodo.Infrastructure.Gateways;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Net.Http.Headers;
 using System.Text;
 
 public class Program
@@ -28,7 +30,7 @@ public class Program
 
       //Variables liées à l'authentification jwt
       var jwtSettings = builder.Configuration.GetSection("JwtSettings");
-      var secretKey = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
+      var secretKey = Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JwtSettings")["Key"]);
 
       builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -63,6 +65,15 @@ public class Program
                 .AllowAnyHeader()
                 .AllowAnyMethod();
          });
+      });
+
+      builder.Services.AddHttpClient<PirateBrokerGateway>(client =>
+      {
+      client.BaseAddress = new Uri(builder.Configuration.GetSection("PirateBrokerParameters")["BrokerURL"]);
+      client.Timeout = TimeSpan.FromSeconds(30);
+      client.DefaultRequestHeaders.Add("Accept", "application/json");
+      client.DefaultRequestHeaders.Add("x-client-id", builder.Configuration.GetSection("PirateBrokerParameters")["ClientId"]);
+      client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", builder.Configuration.GetSection("PirateBrokerParameters")["AppToken"]);
       });
 
       builder.Services.AddSwaggerGen(options =>
