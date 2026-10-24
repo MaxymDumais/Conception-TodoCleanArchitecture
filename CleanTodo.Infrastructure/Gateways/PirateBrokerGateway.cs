@@ -15,7 +15,7 @@ namespace CleanTodo.Infrastructure.Gateways
          _httpClient = httpClient;
       }
 
-      public async Task<List<string>> GetAllPorts()
+      public async Task<IList<string>> GetAllPorts()
       {
          var response = await _httpClient.GetAsync(_httpClient.BaseAddress + "/api/users");
 
