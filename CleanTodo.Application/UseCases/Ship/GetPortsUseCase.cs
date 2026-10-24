@@ -3,6 +3,8 @@ using CleanTodo.Domain.Interfaces.Gateways;
 using CleanTodo.Domain.Interfaces.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
 namespace CleanTodo.Application.UseCases.Ship
@@ -16,10 +18,10 @@ namespace CleanTodo.Application.UseCases.Ship
          _pirateBrokerGateway = pirateBrokerGateway;
       }
 
-      public async Task<IList<string>> Execute()
+      public async Task<string> Execute()
       {
          var ports = await _pirateBrokerGateway.GetAllPorts();
-         return ports.Select(p => new string(p)).ToList();
+         return ports;
       }
    }
 }

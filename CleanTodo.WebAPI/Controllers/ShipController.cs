@@ -122,8 +122,8 @@ namespace CleanTodo.API.Controllers
       [Route("getPorts")]
       public async Task<IActionResult> GetPorts()
       {
-         var portList = await getPortsUseCase.Execute();
-         return Ok(portList);
+         string reponse = await getPortsUseCase.Execute();
+         return Ok(reponse);
       }
    }
 }

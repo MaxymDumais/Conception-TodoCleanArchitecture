@@ -15,13 +15,11 @@ namespace CleanTodo.Infrastructure.Gateways
          _httpClient = httpClient;
       }
 
-      public async Task<IList<string>> GetAllPorts()
+      public async Task<string> GetAllPorts()
       {
-         var response = await _httpClient.GetAsync(_httpClient.BaseAddress + "/api/users");
+         var response = await _httpClient.GetAsync(_httpClient.BaseAddress + "/api/ping");
 
-         var portList = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
-
-         return portList.RootElement.GetProperty("users").EnumerateArray().Select(u => u.GetString()).ToList();
+         return response.ToString();
       }
 
       public async Task<bool> SendShip()
