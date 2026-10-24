@@ -33,11 +33,10 @@ public static class DependencyInjection
       services.AddScoped<UpdateShipUseCase>();
       services.AddScoped<DeleteShipUseCase>();
 
-      //services.AddScoped<GetPortsUseCase>();
+      services.AddScoped<GetPortsUseCase>();
 
       services.AddScoped<CreateTodoValidation>();
-      //services.AddScoped<ToggleTodoCompleteStatusUseCase>();
-
+      
       return services;
     }
 }
