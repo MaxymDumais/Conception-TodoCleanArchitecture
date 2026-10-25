@@ -6,7 +6,7 @@ namespace CleanTodo.Domain.Interfaces.Gateways
 {
    public interface IPirateBrokerGateway
    {
-      Task<bool> GetAllPorts();
+      Task<List<string>> GetAllPorts();
 
       Task<bool> SendShip(/*SailingShip*/);
    }

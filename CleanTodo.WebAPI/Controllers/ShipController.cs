@@ -126,8 +126,8 @@ namespace CleanTodo.API.Controllers
       {
          try
          {
-            bool x = await getPortsUseCase.Execute();
-            return Ok(x);
+            var portList = await getPortsUseCase.Execute();
+            return Ok(portList);
          }
          catch (Exception e)
          {
