@@ -137,7 +137,7 @@ namespace CleanTodo.API.Controllers
       }
 
       [Authorize]
-      [HttpGet]
+      [HttpPost]
       [Route("sendShip")]
       public async Task<IActionResult> SendShip(string destination, Guid idShip)
       {
@@ -158,7 +158,6 @@ namespace CleanTodo.API.Controllers
          catch (Exception e)
          {
             return BadRequest(e);
-            throw;
          }
       }
    }
