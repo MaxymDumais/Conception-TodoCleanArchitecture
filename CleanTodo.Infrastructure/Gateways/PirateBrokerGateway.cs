@@ -1,4 +1,5 @@
-﻿using CleanTodo.Domain.Interfaces.Gateways;
+﻿using Azure;
+using CleanTodo.Domain.Interfaces.Gateways;
 
 namespace CleanTodo.Infrastructure.Gateways
 {
@@ -14,8 +15,9 @@ namespace CleanTodo.Infrastructure.Gateways
 
       public async Task<bool> GetAllPorts()
       {
-            await _httpClient.GetAsync("api/ping");
-            return true;
+         var response = await _httpClient.GetAsync("api/ping");
+         response.EnsureSuccessStatusCode();
+         return true;
       }
 
       public async Task<bool> SendShip()
