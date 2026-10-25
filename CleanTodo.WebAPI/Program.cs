@@ -67,7 +67,7 @@ public class Program
       client.BaseAddress = new Uri(builder.Configuration["PirateBrokerParameters:BrokerURL"]);
       client.Timeout = TimeSpan.FromSeconds(30);
       client.DefaultRequestHeaders.Add("Accept", "application/json");
-      client.DefaultRequestHeaders.Add("X-Client-Id", builder.Configuration["PirateBrokerParameters:ClientId"]);
+      client.DefaultRequestHeaders.Add("x-client-id", builder.Configuration["PirateBrokerParameters:ClientId"]);
       client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", builder.Configuration["PirateBrokerParameters:AppToken"]);
       });
 

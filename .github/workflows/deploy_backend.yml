@@ -39,7 +39,7 @@ jobs:
               "DefaultConnection": "${{secrets.DB_CONNECTION_STRING}}"
             },
             "PirateBrokerParameters": {
-              "PirateBrokerUrl": "https://pwa-broker-pirates-2bc1349418b0.herokuapp.com/api",
+              "PirateBrokerUrl": "https://pwa-broker-pirates-2bc1349418b0.herokuapp.com/api/",
               "ClientId": "${{secrets.APPID}}",
               "AppToken": "${{secrets.APPSECRET}}"
             },
