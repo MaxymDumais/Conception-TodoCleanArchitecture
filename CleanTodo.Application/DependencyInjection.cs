@@ -35,6 +35,7 @@ public static class DependencyInjection
 
       services.AddScoped<GetPortsUseCase>();
       services.AddScoped<SendShipUseCase>();
+      services.AddScoped<DockShipUseCase>();
 
       services.AddScoped<CreateTodoValidation>();
       
