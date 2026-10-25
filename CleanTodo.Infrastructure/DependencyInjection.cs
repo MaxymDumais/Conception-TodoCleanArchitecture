@@ -14,7 +14,6 @@ public static class DependencyInjection
        this IServiceCollection services,
        IConfiguration configuration)
    {
-      // Register DbContext
       var connectionString = configuration.GetConnectionString("DefaultConnection");
       services.AddDbContext<AppDbContext>(options =>
           options.UseMySql(
