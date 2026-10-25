@@ -1,11 +1,4 @@
-﻿using CleanTodo.Domain.DTOS.Ships;
-using CleanTodo.Domain.Interfaces.Gateways;
-using CleanTodo.Domain.Interfaces.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Net.Http.Headers;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
+﻿using CleanTodo.Domain.Interfaces.Gateways;
 
 namespace CleanTodo.Application.UseCases.Ship
 {

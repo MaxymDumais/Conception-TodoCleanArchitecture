@@ -8,6 +8,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Net.Http.Headers;
 using System.Text;
+using CleanTodo.Domain.Interfaces;
+using CleanTodo.Infrastructure.Gateways;
+using CleanTodo.Domain.Interfaces.Gateways;
 
 public class Program
 {
@@ -62,7 +65,7 @@ public class Program
          });
       });
 
-      builder.Services.AddHttpClient<PirateBrokerGateway>(client =>
+      builder.Services.AddHttpClient<IPirateBrokerGateway, PirateBrokerGateway>(client =>
       {
       client.BaseAddress = new Uri(builder.Configuration["PirateBrokerParameters:BrokerURL"]);
       client.Timeout = TimeSpan.FromSeconds(30);
