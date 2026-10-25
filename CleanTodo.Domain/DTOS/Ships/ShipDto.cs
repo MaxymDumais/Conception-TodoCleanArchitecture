@@ -37,5 +37,17 @@ namespace CleanTodo.Domain.DTOS.Ships
          CreatedBy = ship.CreatedBy;
          CreatedAt = ship.CreatedAt;
       }
+
+      public ShipDto(SendShipDto ship)
+      {
+         Id = new Guid();
+         Name = ship.Name;
+         GoldCargo = ship.GoldCargo;
+         Captain = ship.Captain;
+         CrewSize = ship.CrewSize;
+         Status = "docked";
+         CreatedBy = ship.CreatedBy;
+         CreatedAt = ship.CreatedAt;
+      }
    }
 }

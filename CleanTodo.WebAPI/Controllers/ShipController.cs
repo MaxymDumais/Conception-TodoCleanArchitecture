@@ -15,7 +15,14 @@ namespace CleanTodo.API.Controllers
 {
    [ApiController]
    [Route("api/[controller]")]
-   public class ShipController(GetAllShipsUseCase getAllShipsUseCase, GetShipUseCase getShipUseCase, CreateShipUseCase createShipUseCase, UpdateShipUseCase updateShipUseCase, DeleteShipUseCase deleteShipUseCase, GetPortsUseCase getPortsUseCase, SendShipUseCase sendShipUseCase) : ControllerBase
+   public class ShipController(
+      GetAllShipsUseCase getAllShipsUseCase, 
+      GetShipUseCase getShipUseCase, 
+      CreateShipUseCase createShipUseCase, 
+      UpdateShipUseCase updateShipUseCase,
+      DeleteShipUseCase deleteShipUseCase, 
+      GetPortsUseCase getPortsUseCase, 
+      SendShipUseCase sendShipUseCase) : ControllerBase
    {
 
       [Authorize]
@@ -82,7 +89,7 @@ namespace CleanTodo.API.Controllers
          try
          {
 
-            IList<ShipDto> ships = await getAllShipsUseCase.Execute();
+            List<ShipDto> ships = await getAllShipsUseCase.Execute();
             bool isShipExist = false;
 
             foreach (ShipDto s in ships)
@@ -154,11 +161,38 @@ namespace CleanTodo.API.Controllers
             }
                return BadRequest();  
          }
-            
          catch (Exception e)
          {
             return BadRequest(e);
          }
       }
+
+      [Authorize]
+      [HttpPost]
+      [Route("dock")]
+      public async Task<IActionResult> DockShip([FromBody] SendShipDto shipToDock)
+      {
+         try
+         {
+            List<ShipDto> ships = await getAllShipsUseCase.Execute();
+
+            if (ships.Count >= 8)
+               return BadRequest("Le port est plein!! (8 navires maximum). Impossible d'ammarer le navire");
+
+            CreateShipDto dockedShip = new CreateShipDto(shipToDock);
+            
+            ShipDto newShip = await createShipUseCase.Execute(dockedShip);
+            
+            return CreatedAtAction(
+             nameof(Get),
+             new { id = newShip.Id },
+             newShip);
+         }
+         catch (Exception e)
+         {
+            return BadRequest(e);
+         }
+      }
+
    }
 }
