@@ -30,7 +30,7 @@ namespace CleanTodo.Domain.Entities
          Captain = captain;
          CrewSize = crewSize;
          Status = status.ToString();
-         CreatedBy = "Maxym d";
+         CreatedBy = "MaxymD";
          CreatedAt = DateTime.Now; 
          LastModified = DateTime.Now;
       }
@@ -43,7 +43,7 @@ namespace CleanTodo.Domain.Entities
          Captain = captain;
          CrewSize = crewSize;
          Status = status.ToString();
-         CreatedBy = "Maxym d";
+         CreatedBy = "MaxymD";
          CreatedAt = DateTime.Now;
          LastModified = DateTime.Now;
       }

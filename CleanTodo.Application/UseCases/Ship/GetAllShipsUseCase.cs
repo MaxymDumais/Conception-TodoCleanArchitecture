@@ -16,7 +16,7 @@ namespace CleanTodo.Application.UseCases.Ship
          _shipRepository = shipRepository;
       }
 
-      public async Task<IList<ShipDto>> Execute()
+      public async Task<List<ShipDto>> Execute()
       {
          var ships = await _shipRepository.GetAll();
          return ships.Select(s => new ShipDto(s)).ToList();

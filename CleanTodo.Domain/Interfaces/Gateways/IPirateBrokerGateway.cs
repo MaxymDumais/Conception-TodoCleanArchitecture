@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CleanTodo.Domain.DTOS.Ships;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,6 +9,6 @@ namespace CleanTodo.Domain.Interfaces.Gateways
    {
       Task<List<string>> GetAllPorts();
 
-      Task<bool> SendShip(/*SailingShip*/);
+      Task<bool> SendShip(string destination, SendShipDto sendShipDto);
    }
 }

@@ -15,13 +15,13 @@ namespace CleanTodo.API.Controllers
 {
    [ApiController]
    [Route("api/[controller]")]
-   public class ShipController(GetAllShipsUseCase getAllShipsUseCase, GetShipUseCase getShipUseCase, CreateShipUseCase createShipUseCase, UpdateShipUseCase updateShipUseCase, DeleteShipUseCase deleteShipUseCase, GetPortsUseCase getPortsUseCase) : ControllerBase
+   public class ShipController(GetAllShipsUseCase getAllShipsUseCase, GetShipUseCase getShipUseCase, CreateShipUseCase createShipUseCase, UpdateShipUseCase updateShipUseCase, DeleteShipUseCase deleteShipUseCase, GetPortsUseCase getPortsUseCase, SendShipUseCase sendShipUseCase) : ControllerBase
    {
 
       [Authorize]
       [HttpGet]
       [Route("getShips")]
-      public async Task<ActionResult<IEnumerable<ShipDto>>> GetAll()
+      public async Task<ActionResult<List<ShipDto>>> GetAll()
       { 
          try
          {
@@ -53,7 +53,7 @@ namespace CleanTodo.API.Controllers
       [Authorize]
       [HttpPost]
       [Route("addShip")]
-      public async Task<ActionResult<TodoDto>> Create([FromBody] CreateShipDto createShipDto)
+      public async Task<ActionResult<ShipDto>> Create([FromBody] CreateShipDto createShipDto)
       {
          try
          {
@@ -77,7 +77,7 @@ namespace CleanTodo.API.Controllers
       [Authorize]
       [HttpPatch]
       [Route("updateShip")]
-      public async Task<ActionResult<ShipDto>> Update([FromBody] UpdateShipDto updateShipDto)
+      public async Task<IActionResult> Update([FromBody] UpdateShipDto updateShipDto)
       {
          try
          {
@@ -122,13 +122,39 @@ namespace CleanTodo.API.Controllers
       [Authorize]
       [HttpGet]
       [Route("getPorts")]
-      public async Task<IActionResult> GetPorts()
+      public async Task<ActionResult<List<string>>> GetPorts()
       {
          try
          {
             var portList = await getPortsUseCase.Execute();
             return Ok(portList);
          }
+         catch (Exception e)
+         {
+            return BadRequest(e);
+            throw;
+         }
+      }
+
+      [Authorize]
+      [HttpGet]
+      [Route("sendShip")]
+      public async Task<IActionResult> SendShip(string destination, Guid idShip)
+      {
+         try
+         {
+            ShipDto ship = await getShipUseCase.Execute(idShip);
+
+            SendShipDto shipToSend = new SendShipDto(ship.Name, ship.GoldCargo, ship.Captain, ship.CrewSize, ship.CreatedBy, ship.CreatedAt);
+
+            if (await sendShipUseCase.Execute(destination, shipToSend))
+            {
+               await deleteShipUseCase.Execute(idShip);
+               return NoContent();
+            }
+               return BadRequest();  
+         }
+            
          catch (Exception e)
          {
             return BadRequest(e);

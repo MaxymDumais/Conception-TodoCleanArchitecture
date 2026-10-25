@@ -1,4 +1,5 @@
 ﻿using Azure;
+using CleanTodo.Domain.DTOS.Ships;
 using CleanTodo.Domain.Interfaces.Gateways;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -25,8 +26,9 @@ namespace CleanTodo.Infrastructure.Gateways
          return portList.RootElement.GetProperty("users").Deserialize<List<string>>();
       }
 
-      public async Task<bool> SendShip()
+      public async Task<bool> SendShip(string destination, SendShipDto sendShipDto)
       {
+         var response = await _httpClient.PostAsJsonAsync("api/ship/sail/" + destination, sendShipDto);
          return true;
       }
    }
