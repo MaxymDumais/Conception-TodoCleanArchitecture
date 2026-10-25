@@ -22,7 +22,8 @@ namespace CleanTodo.API.Controllers
       UpdateShipUseCase updateShipUseCase,
       DeleteShipUseCase deleteShipUseCase, 
       GetPortsUseCase getPortsUseCase, 
-      SendShipUseCase sendShipUseCase) : ControllerBase
+      SendShipUseCase sendShipUseCase,
+      DockShipUseCase dockShipUseCase) : ControllerBase
    {
 
       [Authorize]
@@ -178,9 +179,7 @@ namespace CleanTodo.API.Controllers
             if (ships.Count >= 8)
                return BadRequest("Le port est plein!! (8 navires maximum). Impossible d'ammarer le navire");
 
-            CreateShipDto dockedShip = new CreateShipDto(shipToDock);
-            
-            ShipDto newShip = await createShipUseCase.Execute(dockedShip);
+            ShipDto newShip = await dockShipUseCase.Execute(shipToDock);
             
             return CreatedAtAction(
              nameof(Get),
