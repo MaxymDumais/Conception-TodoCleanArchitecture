@@ -167,7 +167,6 @@ namespace CleanTodo.API.Controllers
          }
       }
 
-      [Authorize]
       [HttpPost]
       [Route("dock")]
       public async Task<IActionResult> DockShip([FromBody] SendShipDto shipToDock)
