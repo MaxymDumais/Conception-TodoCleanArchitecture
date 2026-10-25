@@ -1,6 +1,7 @@
 ﻿using Azure;
 using CleanTodo.Domain.Interfaces.Gateways;
 using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace CleanTodo.Infrastructure.Gateways
 {
@@ -18,7 +19,10 @@ namespace CleanTodo.Infrastructure.Gateways
       {
          var response = await _httpClient.GetAsync("api/users");
          response.EnsureSuccessStatusCode();
-         return await response.Content.ReadFromJsonAsync<List<string>>();
+
+         var portList = await JsonDocument.ParseAsync(await response.Content.ReadAsStreamAsync());
+
+         return portList.RootElement.GetProperty("users").Deserialize<List<string>>();
       }
 
       public async Task<bool> SendShip()
