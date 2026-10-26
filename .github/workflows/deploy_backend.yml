@@ -47,6 +47,7 @@ jobs:
               "Key": "${{secrets.JWT_KEY}}",
               "Issuer": "CleanTodoAPI",
               "Audience": "CleanTodoApp",
+              "ExpiryMinutes": 60
             }
           }	
           EOF
