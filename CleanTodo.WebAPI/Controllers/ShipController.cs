@@ -146,7 +146,7 @@ namespace CleanTodo.API.Controllers
 
       [Authorize]
       [HttpPost]
-      [Route("{id}/sendShip/{destination}")]
+      [Route("{idShip}/sendShip/{destination}")]
       public async Task<IActionResult> SendShip(string destination, Guid idShip)
       {
          try
