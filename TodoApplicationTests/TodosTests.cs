@@ -63,7 +63,7 @@
 
 //      _registerUserUseCase = new RegisterUserUseCase(_userRepository.Object, _registerUserValidator);
 //      _loginUserUseCase = new LoginUserUseCase(_userRepository.Object);
-//      }
+//   }
 
 //   [Test]
 //   public async Task RegisterUser_ReturnCreatedUser()
@@ -75,72 +75,72 @@
 //      Assert.AreEqual(register.Username, result.Username);
 //   }
 
-   //[Test]
-   //public async Task CreateTodo_ShouldReturnCreatedTodo()
-   //{
-   //   // Arrange
-   //   CreateTodoDto createTodoDto = new CreateTodoDto { Title = "Test Todo" };
-   //   // Act
-   //   var result = await _createTodoUseCase.Execute(createTodoDto);
+//   [Test]
+//   public async Task CreateTodo_ShouldReturnCreatedTodo()
+//   {
+//      // Arrange
+//      CreateTodoDto createTodoDto = new CreateTodoDto { Title = "Test Todo" };
+//      // Act
+//      var result = await _createTodoUseCase.Execute(createTodoDto);
 
-   //   // Assert
-   //   Assert.That(todo1.Id == result.Id, "Todo is returned");
-   //   Assert.That(todo1.Text == result.Title, "Same text");
-   //}
+//      // Assert
+//      Assert.That(todo1.Id == result.Id, "Todo is returned");
+//      Assert.That(todo1.Text == result.Title, "Same text");
+//   }
 
-   //[Test]
-   //public async Task GetTodo_ShouldReturnTodo()
-   //{
-   //   // Arrange
-   //   CreateTodoDto createTodoDto = new CreateTodoDto { Title = "Test Todo" };
-   //   // Act
-   //   var result = await _getTodoUseCase.Execute(todo1.Id);
+//   [Test]
+//   public async Task GetTodo_ShouldReturnTodo()
+//   {
+//      // Arrange
+//      CreateTodoDto createTodoDto = new CreateTodoDto { Title = "Test Todo" };
+//      // Act
+//      var result = await _getTodoUseCase.Execute(todo1.Id);
 
-   //   // Assert
-   //   Assert.That(todo1.Id == result.Id, "Todo is returned");
-   //   Assert.That(todo1.Text == result.Title, "Same text");
-   //}
+//      // Assert
+//      Assert.That(todo1.Id == result.Id, "Todo is returned");
+//      Assert.That(todo1.Text == result.Title, "Same text");
+//   }
 
-   //[Test]
-   //public async Task DeleteTodo_ShouldCallRepositoryDelete()
-   //{
-   //   // Act
-   //   await _deleteTodoUseCase.Execute(todo1.Id);
+//   [Test]
+//   public async Task DeleteTodo_ShouldCallRepositoryDelete()
+//   {
+//      // Act
+//      await _deleteTodoUseCase.Execute(todo1.Id);
 
-   //   // Assert
-   //   _todoRepositoryMock.Verify(repo => repo.Delete(todo1.Id), Times.Once);
-   //}
+//      // Assert
+//      _todoRepositoryMock.Verify(repo => repo.Delete(todo1.Id), Times.Once);
+//   }
 
-   //[Test]
-   //public async Task GetAllTodos_ShouldReturnAllTodos()
-   //{
-   //   // Act
-   //   var result = await _getAllTodosUseCase.Execute();
+//   [Test]
+//   public async Task GetAllTodos_ShouldReturnAllTodos()
+//   {
+//      // Act
+//      var result = await _getAllTodosUseCase.Execute();
 
-   //   // Assert
-   //   Assert.That(result.Count == 2, "Got 2 todos");
-   //   Assert.That(todo1.Id == result[0].Id, "Both todos are returned");
-   //   Assert.That(todo2.Id == result[1].Id, "Both todos are returned");
-   //}
+//      // Assert
+//      Assert.That(result.Count == 2, "Got 2 todos");
+//      Assert.That(todo1.Id == result[0].Id, "Both todos are returned");
+//      Assert.That(todo2.Id == result[1].Id, "Both todos are returned");
+//   }
 
-   //[Test]
-   //public async Task ToggleTodoCompleteStatus_ShouldCallRepositoryToggleCompleteStatus()
-   //{
-   //   // Act
-   //   await _toggleTodoCompleteStatusUseCase.Execute(todo1.Id);
+//   [Test]
+//   public async Task ToggleTodoCompleteStatus_ShouldCallRepositoryToggleCompleteStatus()
+//   {
+//      // Act
+//      await _toggleTodoCompleteStatusUseCase.Execute(todo1.Id);
 
-   //   // Assert
-   //   _todoRepositoryMock.Verify(repo => repo.ToggleCompleteStatus(todo1.Id), Times.Once);
-   //}
+//      // Assert
+//      _todoRepositoryMock.Verify(repo => repo.ToggleCompleteStatus(todo1.Id), Times.Once);
+//   }
 
-   //[Test]
-   //public async Task DelitingAMissingTodo_ShouldThrowAnError()
-   //{
-   //   Guid idOfAFakeTodo = Guid.NewGuid();
-   //   // Act
+//   [Test]
+//   public async Task DelitingAMissingTodo_ShouldThrowAnError()
+//   {
+//      Guid idOfAFakeTodo = Guid.NewGuid();
+//      // Act
 
-   //   // Assert
-   //   Assert.ThrowsAsync<NotFoundException>(async () => await _toggleTodoCompleteStatusUseCase.Execute(idOfAFakeTodo));
-   //   _todoRepositoryMock.Verify(repo => repo.FindById(idOfAFakeTodo), Times.Once);
-   //}
+//      // Assert
+//      Assert.ThrowsAsync<NotFoundException>(async () => await _toggleTodoCompleteStatusUseCase.Execute(idOfAFakeTodo));
+//      _todoRepositoryMock.Verify(repo => repo.FindById(idOfAFakeTodo), Times.Once);
+//   }
 //}
